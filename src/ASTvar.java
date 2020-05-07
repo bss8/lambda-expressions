@@ -2,24 +2,24 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 public
 class ASTvar extends SimpleNode {
-  public ASTvar(int id) {
-    super(id);
-  }
+    public ASTvar(int id) {
+        super(id);
+    }
 
-  public ASTvar(Prog3 p, int id) {
-    super(p, id);
-  }
+    public ASTvar(Prog3 p, int id) {
+        super(p, id);
+    }
 
-  private String tokenValue;
+    private String tokenValue;
 
-  public void set(String value) {
-	freeVariables.add(value.trim());
-    tokenValue = value.trim();
-  }
+    public void set(String value) {
+        freeVariables.add(value.trim());
+        tokenValue = value.trim();
+    }
 
-  @Override
-  public String toString() {
-    return tokenValue;
-  }
+    @Override
+    public String toString() {
+        return tokenValue;
+    }
 }
 /* JavaCC - OriginalChecksum=12801cdc90218f2b84369a9112c49f60 (do not edit this line) */

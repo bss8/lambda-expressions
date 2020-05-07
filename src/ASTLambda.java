@@ -19,14 +19,14 @@ class ASTLambda extends SimpleNode {
         StringBuilder str = new StringBuilder(30);
         str.append("(L ");
 
-        if (children != null && children.length > 0) {
-            SimpleNode n = (SimpleNode) children[0];
-            if (n != null) {
-                str.append(n.printExpr()).append(" . ");
+        if (children.length > 0) {
+            SimpleNode node = (SimpleNode) children[0];
+            if (node != null) {
+                str.append(node.printExpr()).append(" . ");
             }
-            n = (SimpleNode) children[1];
-            if (n != null) {
-                str.append(n.printExpr());
+            node = (SimpleNode) children[1];
+            if (node != null) {
+                str.append(node.printExpr());
             }
         }
         return str.toString() + ")";
@@ -41,11 +41,11 @@ class ASTLambda extends SimpleNode {
                 SimpleNode n = (SimpleNode) children[i];
                 if (n != null) {
                     if (i == 0) boundVar = n.toString();
-					hashSet.addAll(n.freeVars());
+                    hashSet.addAll(n.freeVars());
                 }
             }
         }
-		hashSet.remove(boundVar);
+        hashSet.remove(boundVar);
         return hashSet;
     }
 

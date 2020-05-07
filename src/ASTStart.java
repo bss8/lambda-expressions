@@ -73,9 +73,9 @@ class ASTStart extends SimpleNode {
     public void dumpFV(String prefix) {
         if (children != null) {
             for (Node child : children) {
-                SimpleNode n = (SimpleNode) child;
-                if (n != null) {
-                    n.dumpFV(prefix + " ");
+                SimpleNode node = (SimpleNode) child;
+                if (node != null) {
+                    node.dumpFV(prefix + " ");
                 }
             }
         }
