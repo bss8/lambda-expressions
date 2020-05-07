@@ -10,11 +10,14 @@ class ASTStart extends SimpleNode {
         super(p, id);
     }
 
+    @Override
     public SimpleNode substitute(String varToSubstitute, SimpleNode expression) {
         expression.dump("");
         System.out.print("\n");
+
         String firstChildString = children[0].toString();
         System.out.println(firstChildString);
+
         if ("Lambda".equals(firstChildString)) {
             return ((ASTLambda) children[0]).substitute(varToSubstitute, expression);
         } else if ("Appl".equals(firstChildString)) {
@@ -57,12 +60,12 @@ class ASTStart extends SimpleNode {
     @Override
     public void dump(String prefix) {
         if (children != null) {
-			for (Node child : children) {
-				SimpleNode n = (SimpleNode) child;
-				if (n != null) {
-					n.dump(prefix + " ");
-				}
-			}
+            for (Node child : children) {
+                SimpleNode n = (SimpleNode) child;
+                if (n != null) {
+                    n.dump(prefix + " ");
+                }
+            }
         }
     }
 

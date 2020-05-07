@@ -2,32 +2,33 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 public
 class ASTconstant extends SimpleNode {
-  public ASTconstant(int id) {
-    super(id);
-  }
+    public ASTconstant(int id) {
+        super(id);
+    }
 
-  public ASTconstant(Prog3 p, int id) {
-    super(p, id);
-  }
+    public ASTconstant(Prog3 p, int id) {
+        super(p, id);
+    }
 
-  private String tokenValue;
+    private String tokenValue;
 
-  public void set(String val) {
-	  if ("*".equals(val)) {
-		  tokenValue = "mul";
-	  } else if ("/".equals(val)) {
-		  tokenValue = "div";
-	  } else if ("+".equals(val)) {
-		  tokenValue = "add";
-	  } else if ("-".equals(val)) {
-		  tokenValue = "sub";
-	  } else {
-		  tokenValue = val;
-	  }
-  }
+    public void set(String val) {
+        if ("*".equals(val)) {
+            tokenValue = "mul";
+        } else if ("/".equals(val)) {
+            tokenValue = "div";
+        } else if ("+".equals(val)) {
+            tokenValue = "add";
+        } else if ("-".equals(val)) {
+            tokenValue = "sub";
+        } else {
+            tokenValue = val;
+        }
+    }
 
-  public String toString() {
-    return tokenValue;
-  }
+    @Override
+    public String toString() {
+        return tokenValue;
+    }
 }
 /* JavaCC - OriginalChecksum=6c2aa97aeff68a8ad6cbd6e8c9e464a1 (do not edit this line) */

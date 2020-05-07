@@ -12,11 +12,12 @@ class ASTvar extends SimpleNode {
 
   private String tokenValue;
 
-  public void set(String val) {
-	freeVariables.add(val.trim());
-    tokenValue = val.trim();
+  public void set(String value) {
+	freeVariables.add(value.trim());
+    tokenValue = value.trim();
   }
-  
+
+  @Override
   public String toString() {
     return tokenValue;
   }

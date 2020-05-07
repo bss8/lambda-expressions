@@ -17,6 +17,7 @@ class ASTAppl extends SimpleNode {
     public String printExpr() {
         StringBuilder str = new StringBuilder(30);
         str.append("(");
+
         if (children != null) {
             for (int i = 0; i < children.length; i++) {
                 SimpleNode n = (SimpleNode) children[i];
@@ -33,16 +34,16 @@ class ASTAppl extends SimpleNode {
 
     @Override
     public Set<String> freeVars() {
-        Set<String> hash = new HashSet<>();
+        Set<String> hashSet = new HashSet<>();
         if (children != null) {
             for (Node child : children) {
                 SimpleNode n = (SimpleNode) child;
                 if (n != null) {
-                    hash.addAll(n.freeVars());
+                    hashSet.addAll(n.freeVars());
                 }
             }
         }
-        return hash;
+        return hashSet;
     }
 
     @Override
