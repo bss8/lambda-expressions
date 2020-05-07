@@ -45,7 +45,7 @@ class ASTStart extends SimpleNode {
 
     @Override
     public String printExpr() {
-        StringBuilder str = new StringBuilder(20);
+        StringBuilder str = new StringBuilder(30);
         if (children != null) {
             for (Node child : children) {
                 SimpleNode n = (SimpleNode) child;
