@@ -39,7 +39,7 @@ class Bonus
 			  ASTStart v = (new Prog3(System.in)).Start();
 			  System.out.println("");
 			  System.out.println("The normal order evaluation result:");
-			  SimpleNode u = v.normalOrderEvaluate();
+			  SimpleNode u = v.normalOrderEvaluation();
 			  u.dump("");
 		} catch (Exception e) {
 		  System.out.println("Error:");

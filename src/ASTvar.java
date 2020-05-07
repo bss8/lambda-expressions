@@ -10,15 +10,15 @@ class ASTvar extends SimpleNode {
     super(p, id);
   }
 
-  private String VAL;
+  private String tokenValue;
 
   public void set(String val) {
-	fvars.add(val.trim());
-    VAL = val.trim();
+	freeVariables.add(val.trim());
+    tokenValue = val.trim();
   }
   
   public String toString() {
-    return VAL;
+    return tokenValue;
   }
 }
 /* JavaCC - OriginalChecksum=12801cdc90218f2b84369a9112c49f60 (do not edit this line) */

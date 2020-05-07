@@ -31,30 +31,30 @@ class ASTLambda extends SimpleNode {
   
   public Set<String> freeVars() {
 	  Set<String> hash = new HashSet<>();
-	  String bound = "";
+	  String boundVar = "";
 	  if (children != null) {
-		  for (int i = 0; i < children.length; ++i) {
-			SimpleNode n = (SimpleNode)children[i];
+		  for (int i = 0; i < children.length; i++) {
+			SimpleNode n = (SimpleNode) children[i];
 			if (n != null) {
-				if(i == 0) bound = n.toString();
+				if(i == 0) boundVar = n.toString();
 				hash.addAll(n.freeVars());
 			}
 		  }
 	  }
-	  hash.remove(bound);
+	  hash.remove(boundVar);
 	  return hash;
   }
 
-  public SimpleNode substitute(String var, SimpleNode expr){
-	SimpleNode n = (SimpleNode)children[0];
-	SimpleNode m = (SimpleNode)children[1];
-	if (!n.toString().equals(var)){
-		if(m.toString() == "Appl" || m.toString() == "Lambda") {
-			Node tmp = m.substitute(var, expr);
+  public SimpleNode substitute(String varToSubstitute, SimpleNode expression){
+	SimpleNode firstNode = (SimpleNode) children[0];
+	SimpleNode secondNode = (SimpleNode) children[1];
+	if (!firstNode.toString().equals(varToSubstitute)){
+		if("Appl".equals(secondNode.toString()) || "Lambda".equals(secondNode.toString())) {
+			Node tmp = secondNode.substitute(varToSubstitute, expression);
 			children[1] = tmp;
 		}
-		else if(m.toString() == var) {
-			children[1] = expr;
+		else if(varToSubstitute.equals(secondNode.toString())) {
+			children[1] = expression;
 		}
 	}
 	return this;
@@ -65,24 +65,15 @@ class ASTLambda extends SimpleNode {
 		SimpleNode n = (SimpleNode)children[0];
 		SimpleNode m = (SimpleNode)children[1];
 		if (n != null && m != null){
-			if(m.toString() == "Appl" || m.toString() == "Lambda") children[1] = m.application(var, expr);
-			else if(m.toString() == var) children[1] = expr;
+			if("Appl".equals(m.toString()) || "Lambda".equals(m.toString())) children[1] = m.application(var, expr);
+			else if(var.equals(m.toString())) children[1] = expr;
 	    }
 	}
 	return this;
   }
   
-	public SimpleNode normalOrderEvaluate(){
-		if (children != null) {
-			SimpleNode[] n = (SimpleNode[])children;
-			for (int i = 1; i < n.length; ++i) {
-				if (n[i] != null) {
-				  if(n[i].toString() == "Appl" || n[i].toString() == "Lambda"){
-					  n[i] = n[i].normalOrderEvaluate();
-				  }
-				}
-			}
-		}
+	public SimpleNode normalOrderEvaluation(){
+  		// TODO
 		return this;
     }
 }

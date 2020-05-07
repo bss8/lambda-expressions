@@ -10,44 +10,37 @@ class ASTStart extends SimpleNode {
         super(p, id);
     }
 
-    public SimpleNode substitute(String var, SimpleNode expr) {
-        expr.dump("");
-        System.out.println("");
-        String x = children[0].toString();
-        System.out.println(x);
-        if (x == "Lambda") {
-            return ((ASTLambda) children[0]).substitute(var, expr);
-        } else if (x == "Appl") {
-            return ((ASTAppl) children[0]).substitute(var, expr);
-        } else if (x == var) {
-            return expr;
+    public SimpleNode substitute(String varToSubstitute, SimpleNode expression) {
+        expression.dump("");
+        System.out.print("\n");
+        String firstChildString = children[0].toString();
+        System.out.println(firstChildString);
+        if ("Lambda".equals(firstChildString)) {
+            return ((ASTLambda) children[0]).substitute(varToSubstitute, expression);
+        } else if ("Appl".equals(firstChildString)) {
+            return ((ASTAppl) children[0]).substitute(varToSubstitute, expression);
+        } else if (firstChildString.equals(varToSubstitute)) {
+            return expression;
         }
         return this;
     }
 
-    public SimpleNode normalOrderEvaluate() {
-        if (children == null) return this;
-        Node[] n = (Node[]) children;
-        for (int i = 0; i < children.length; ++i) {
-            if (n[i] != null) {
-                if (n[i].toString() == "Appl") {
-                    n[i] = (Node) ((ASTAppl) n[i]).normalOrderEvaluate();
-                } else if (n[i].toString() == "Lambda") {
-                    return ((SimpleNode) n[i]).normalOrderEvaluate();
-                } else return (SimpleNode) n[i];
-            }
-        }
+    @Override
+    public ASTStart normalOrderEvaluation() {
         return this;
     }
 
+    @Override
     public String toString(String prefix) {
         return "";
     }
 
+    @Override
     public String toString() {
         return "";
     }
 
+    @Override
     public String printExpr() {
         StringBuilder str = new StringBuilder(20);
         if (children != null) {
@@ -61,6 +54,7 @@ class ASTStart extends SimpleNode {
         return str.toString();
     }
 
+    @Override
     public void dump(String prefix) {
         if (children != null) {
 			for (Node child : children) {
@@ -72,10 +66,11 @@ class ASTStart extends SimpleNode {
         }
     }
 
+    @Override
     public void dumpFV(String prefix) {
         if (children != null) {
-            for (int i = 0; i < children.length; ++i) {
-                SimpleNode n = (SimpleNode) children[i];
+            for (Node child : children) {
+                SimpleNode n = (SimpleNode) child;
                 if (n != null) {
                     n.dumpFV(prefix + " ");
                 }

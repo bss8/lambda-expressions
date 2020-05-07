@@ -10,24 +10,24 @@ class ASTconstant extends SimpleNode {
     super(p, id);
   }
 
-  private String VAL;
+  private String tokenValue;
 
   public void set(String val) {
 	  if ("*".equals(val)) {
-		  VAL = "mul";
+		  tokenValue = "mul";
 	  } else if ("/".equals(val)) {
-		  VAL = "div";
+		  tokenValue = "div";
 	  } else if ("+".equals(val)) {
-		  VAL = "add";
+		  tokenValue = "add";
 	  } else if ("-".equals(val)) {
-		  VAL = "sub";
+		  tokenValue = "sub";
 	  } else {
-		  VAL = val;
+		  tokenValue = val;
 	  }
   }
 
   public String toString() {
-    return VAL;
+    return tokenValue;
   }
 }
 /* JavaCC - OriginalChecksum=6c2aa97aeff68a8ad6cbd6e8c9e464a1 (do not edit this line) */

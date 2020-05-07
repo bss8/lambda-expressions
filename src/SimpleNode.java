@@ -4,7 +4,7 @@ import java.util.*;
 
 public
 class SimpleNode implements Node {
-  public Set<String> fvars;
+  public Set<String> freeVariables;
   public Node parent;
   public Node[] children;
   protected int id;
@@ -13,13 +13,13 @@ class SimpleNode implements Node {
 
   public SimpleNode(int i) {
     id = i;
-	fvars = new HashSet<>();
+	freeVariables = new HashSet<>();
   }
 
   public SimpleNode(Prog3 p, int i) {
     this(i);
     parser = p;
-	fvars = new HashSet<>();
+	freeVariables = new HashSet<>();
   }
 
   public void jjtOpen() {
@@ -80,7 +80,7 @@ class SimpleNode implements Node {
   }
 
   public Set<String> freeVars() {
-	  return fvars;
+	  return freeVariables;
   }
 
   public void dumpFV(String prefix){
@@ -95,6 +95,7 @@ class SimpleNode implements Node {
     }
   }
 
+  @Override
   public int getId() {
     return id;
   }
@@ -103,33 +104,19 @@ class SimpleNode implements Node {
 	return toString();
   }
   
-  public SimpleNode substitute(String var, SimpleNode expr){
-	throw new Error("not implemented");
+  public SimpleNode substitute(String varToSubstitute, SimpleNode expression){
+
+      return this;
   }
 
   public SimpleNode application(String var, SimpleNode expr){
-	throw new Error("not implemented");
+
+      return this;
   }
 
-  public SimpleNode normalOrderEvaluate(){
-	throw new Error("not implemented");
-  }
-  
-  public String delta_redux(String op, String c1, String c2){
-	  int v1 = Integer.parseInt(c1);
-	  int v2 = Integer.parseInt(c2);
-	  switch(op){
-		case "*":
-			return String.valueOf(v1*v2);
-		case "/":
-			return String.valueOf(v1/v2);
-		case "+":
-			return String.valueOf(v1+v2);
-		case "-":
-			return String.valueOf(v1-v2);
-		default:
-			return null;
-	  }
+  public SimpleNode normalOrderEvaluation(){
+
+      return this;
   }
 
   public boolean isInteger(String input)
